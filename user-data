@@ -1,10 +1,23 @@
 #cloud-config
-
-# remove this block entirely if not using password authentication
-password: Asdfqwerty
-ssh_pwauth: True
-chpasswd: { expire: False }
-
-# replace with your own public key (e.g. ~/.ssh/id_rsa.pub)
-ssh_authorized_keys:
-  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIq9uNlEi5R9Riqk8fpg5bs/24gYNlohR8zqd7fBONa65IXYs+Zignc+NGlX5JtVANhDQmULd36lY90SHpsSVqzEfTEBaAZE92ypfERIlyvoNQA5FajuxSLGxagwhnTxVzZ7FQ+faVFNmpSU3kGMYefPsnC8ykXexzBmKmviu8olPMvY0uUJRDvJ7OyVLk88M1J6LtACw66WLUEwx5v61d+/oiYb1L7ILZNExWXyLZUeMnP/Ke+77Rvd3F3AzgFByk5kFPVqeYo2CN+CU+Rc7SarlP33dkEOWhnvHGdn0i6k2ZtpwrmnM9M0EQFTAitHgvcEjWNiiecJXKi8vBRpFZ example@example.com
+users:
+  - name: zph
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC1khgoTnIfy3h+23lKnK72LLxuznJAe2JzLMi3UG+U9VUIbctre/Avt3eCdPGkTp9W/rWO8QFKj6OkFvjNHA+YST7NYobkVNwPddpuKFt19/T3iNXLOE5zhg3CYk1EBGM89pdLK7QNg+dVfi5Tk8jAKgNYRtZjgFb9c+0ZYjmNmsEzjMAnmlQxb+zWUP9tctcVNONkvRWaaTX41X089hjcl7kVdXe8XDVazw5Xkjmh/nBPKiGYTCO2EkbUYpXAn1/iZ4PPXiqDLZbAY4JSE73q748AZshZkAeti3ZZsIgpX5Z2x9B5Jwn3rorC0/8EJ9WivzJtn9L7JfB52UhS2xT ilumos
+chpasswd:
+  list: |
+    zph:zph
+  expire: True
+runcmd:
+  - [ update-grub ]
+write_files:
+  - content: |
+        hostname $new_host_name
+    path: /etc/dhcp/dhclient-exit-hooks.d/sethostname
+power_state:
+    mode: reboot
+    message: Cloud init completed, rebooting
+    timeout: 5
+    condition: True

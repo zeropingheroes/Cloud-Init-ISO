@@ -1,2 +1,2 @@
 instance-id: cloud-host-0
-local-hostname: cloudhost
+local-hostname: localhost

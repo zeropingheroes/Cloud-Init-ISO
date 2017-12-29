@@ -40,4 +40,5 @@ hereby licensed under the MIT License; see `LICENSE`.
 [1]: http://cloudinit.readthedocs.org/en/latest/topics/datasources.html#no-cloud
 [2]: https://www.technovelty.org/linux/running-cloud-images-locally.html
 [3]: http://www.projectatomic.io/blog/2014/10/getting-started-with-cloud-init/
-
+[4]: http://cloudinit.readthedocs.io/en/latest/topics/examples.html
+[5]: https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting
